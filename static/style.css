@@ -164,11 +164,12 @@ header {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.45);
   z-index: 149;
 }
 
 .sidebar-overlay.show { display: block; }
+
 
 /* ── LAYOUT ── */
 .layout {
@@ -583,6 +584,9 @@ header {
   background: rgba(99,102,241,0.08);
 }
 
+/* ════════════════════════════════
+   RESPONSIVE — TABLET (≤ 960px)
+════════════════════════════════ */
 @media (max-width: 960px) {
   .hamburger { display: flex; }
   .header-badge { display: none; }
@@ -591,23 +595,25 @@ header {
     grid-template-columns: 1fr;
   }
 
-  /* Sidebar becomes a slide-in drawer */
+  /* Sidebar: hidden off-screen, slides in when .open is added */
   .sidebar {
-    position: fixed;
-    top: var(--header-h);
-    left: 0;
-    width: 280px;
-    height: calc(100vh - var(--header-h));
-    z-index: 150;
-    background: var(--surface);
-    border-right: 1px solid rgba(99,102,241,0.2);
-    transform: translateX(-100%);
-    padding: 1.25rem 0.875rem;
-    box-shadow: 8px 0 32px rgba(0,0,0,0.4);
+    position: fixed !important;
+    top: var(--header-h) !important;
+    left: 0 !important;
+    width: 280px !important;
+    height: calc(100vh - var(--header-h)) !important;
+    z-index: 150 !important;
+    background: var(--surface) !important;
+    border-right: 1px solid rgba(99,102,241,0.25) !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 1.25rem 0.875rem !important;
+    box-shadow: 8px 0 32px rgba(0,0,0,0.5) !important;
+    overflow-y: auto !important;
   }
 
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 
   .main {
@@ -620,6 +626,9 @@ header {
   }
 }
 
+/* ════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 600px)
+════════════════════════════════ */
 @media (max-width: 600px) {
   :root { --header-h: 58px; }
 
@@ -667,6 +676,9 @@ header {
   .chip { padding: 6px 12px; font-size: 0.75rem; }
 }
 
+/* ════════════════════════════════
+   RESPONSIVE — TINY (≤ 360px)
+════════════════════════════════ */
 @media (max-width: 360px) {
   .result-grid { grid-template-columns: 1fr; }
   .main { padding: 0.875rem 0.75rem 5rem; }
