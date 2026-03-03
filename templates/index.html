@@ -615,11 +615,14 @@ function closeSidebar() {
 }
 
 function show(type) {
+  // Always close sidebar first (handles mobile drawer)
+  closeSidebar();
+
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('page-header').style.display = 'block';
 
   const meta = META[type] || { title: type, sub: '' };
-  document.getElementById('page-title').innerHTML = `<span>${meta.title}</span>`;
+  document.getElementById('page-title').innerHTML = '<span>' + meta.title + '</span>';
   document.getElementById('page-subtitle').textContent = meta.sub;
 
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
@@ -629,14 +632,10 @@ function show(type) {
   if (panel) panel.classList.add('active');
 
   document.querySelectorAll('.nav-item').forEach(n => {
-    if (n.getAttribute('onclick') === `show('${type}')`) n.classList.add('active');
+    if (n.getAttribute('onclick') === "show('" + type + "')") n.classList.add('active');
   });
 
   activePanel = type;
-
-  // Close sidebar on mobile after selecting
-  if (window.innerWidth <= 960) closeSidebar();
-
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
