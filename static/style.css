@@ -100,6 +100,7 @@ header {
 
 .logo-text span {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -210,6 +211,7 @@ header {
 
 .page-title span {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -416,6 +418,7 @@ header {
 
 .result-value.highlight {
   background: linear-gradient(90deg, var(--accent3), #6ee7b7);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.25rem;
@@ -423,6 +426,7 @@ header {
 
 .result-value.gold-val {
   background: linear-gradient(90deg, var(--gold), #fde68a);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
