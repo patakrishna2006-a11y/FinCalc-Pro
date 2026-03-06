@@ -23,32 +23,8 @@ pip install -r requirements.txt
 python app.py
 # Open http://localhost:5000
 ```
-
-## Deploy to Render (Free)
-
-1. Push this folder to a GitHub repo
-2. Go to https://render.com → New Web Service
-3. Connect your repo
-4. Set:
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `gunicorn app:app`
-5. Deploy ✓
-
-## Deploy to Railway
-
-```bash
-npm install -g @railway/cli
-railway login
-railway init
-railway up
-```
-
-## Deploy to Heroku
-
-```bash
-heroku create fincalc-pro
-git push heroku main
-```
+To see the Financial calculator online follow this link 👇
+Link:- https://web-production-98cf4.up.railway.app/
 
 ## Calculators Included
 
