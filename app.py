@@ -32,6 +32,7 @@ class CalculationHistory(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     calc_type = db.Column(db.String(50), nullable=False)
     params = db.Column(db.Text, nullable=False)
+    result = db.Column(db.Text, nullable=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 with app.app_context():
@@ -114,6 +115,7 @@ def calculate():
     data = request.get_json()
     calc_type = data.get("type")
     params = data.get("params", {})
+    result = data.get("result", None)
 
     try:
         calculators = {
@@ -153,6 +155,7 @@ def calculate():
                     user_id=session['user_id'],
                     calc_type=calc_type,
                     params=json.dumps(params),
+                    result=json.dumps(result) if isinstance(result, (dict, list)) else str(result)
                 )
                 db.session.add(history_entry)
                 db.session.commit()
