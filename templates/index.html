@@ -3,17 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FinCalc Pro — Indian Finance Calculator</title>
+  <title>FinCalc Pro </title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div id="toast" class="toast-msg {{ category }}">{{ message }}</div>
+      <script>
+        // Automatically hide the popup after 3 seconds
+        setTimeout(() => {
+          const toast = document.getElementById('toast');
+          if(toast) toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
+      </script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 <body>
+<script>
+function confirmLogout(event) {
+    // Prevent the immediate jump to the logout route
+    event.preventDefault();
+    
+    // Show the confirmation popup
+    const userConfirmed = confirm("Are you sure you want to log out ?");
+    
+    if (userConfirmed) {
+        // If they click 'OK', proceed to the logout URL
+        window.location.href = event.currentTarget.getAttribute('href');
+    }
+    return false;
+}
+</script>
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
     <div class="logo">
       <div class="logo-icon">₹</div>
-      <div class="logo-text">Fin<span>Calc</span> Pro</div>
+      <div class="logo-text">Fin<span>Calc</span>Pro</div>
     </div>
     <div class="header-badge">ALL CALCULATORS</div>
   </div>
@@ -536,6 +568,29 @@
         <div class="error-box" id="BROKERAGE_CALCULATOR-error"></div>
       </div>
       <div class="result-box" id="BROKERAGE_CALCULATOR-result"><div class="card"><div class="card-title">Results</div><div class="result-grid" id="BROKERAGE_CALCULATOR-result-grid"></div></div></div>
+    </div>
+
+    <div class="sidebar-section">
+    <div class="sidebar-label">Account</div>
+    <a href="{{ url_for('logout') }}" 
+       class="nav-item logout-item" 
+       onclick="return confirmLogout(event)">
+        <span class="icon">🚀</span>
+        Logout
+    </a>
+    </div>
+
+    <div class="sidebar-section">
+    <div class="sidebar-label">Recent Activity</div>
+    {% for entry in history %}
+    <div class="nav-item" style="font-size: 0.75rem; color: var(--muted);">
+        <span>{{ entry.calc_type }}</span>
+        <span style="margin-left: auto; font-style: italic;">{{ entry.params }}</span>
+        <span style="margin-left: auto;">{{ entry.timestamp.strftime('%H:%M') }}</span>
+    </div>
+    {% else %}
+    <div class="nav-item" style="font-size: 0.75rem; color: var(--muted);">No history yet</div>
+    {% endfor %}
     </div>
 
   </main>
