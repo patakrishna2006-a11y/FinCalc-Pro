@@ -10,10 +10,14 @@ finapp/
 ├── calculator.py       # Core calculation logic (unchanged)
 ├── requirements.txt    # Python dependencies
 ├── Procfile            # For deployment (Render / Railway / Heroku)
-├── templates/
+├── templates
 │   └── index.html      # Full frontend (single-page app)
+    |__ login.html      # Login page
+    |__ register.html   # register page
 └── static/
     └── style.css       # Stylesheet
+|__ instance
+    |__ users.db        # stores users data like username, password in hash code and history
 ```
 
 ## Run Locally
@@ -22,9 +26,6 @@ finapp/
 pip install -r requirements.txt
 python app.py
 # Open http://localhost:5000
-```
-To see the Financial calculator online follow this link 👇
-Link:- https://web-production-98cf4.up.railway.app/
 
 ## Calculators Included
 
