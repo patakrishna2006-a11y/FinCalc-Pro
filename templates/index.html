@@ -587,6 +587,7 @@ function confirmLogout(event) {
         <span>{{ entry.calc_type }}</span>
         <span style="margin-left: auto; font-style: italic;">{{ entry.params }}</span>
         <span style="margin-left: auto;">{{ entry.timestamp.strftime('%H:%M') }}</span>
+        <span style="margin-left: auto;">{{ entry.result }}</span>
     </div>
     {% else %}
     <div class="nav-item" style="font-size: 0.75rem; color: var(--muted);">No history yet</div>
