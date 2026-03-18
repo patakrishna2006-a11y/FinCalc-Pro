@@ -99,7 +99,8 @@ def dashboard():
         processed_history.append({
             'calc_type': entry.calc_type.replace('_', ' '),
             'params': format_json_data(entry.params),
-            'timestamp': ist_time
+            'timestamp': ist_time,
+            'result': format_json_data(entry.result) if entry.result else "N/A"
         })
 
     return render_template("index.html", history=processed_history)
