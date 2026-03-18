@@ -57,8 +57,7 @@ def register():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
-        new_user = User(username=username, password=hashed_pw)
+        new_user = User(username=username, password=password)
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -75,7 +74,7 @@ def login():
     username = request.form.get('username').strip().lower()
     password = request.form.get('password').strip()
     user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password, password):
+    if user and user.password == password:
         session['user_id'] = user.id
         flash('Successful login!', 'success')
         return redirect(url_for('dashboard'))
