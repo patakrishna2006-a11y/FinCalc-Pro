@@ -156,7 +156,7 @@ def calculate():
                     user_id=session['user_id'],
                     calc_type=calc_type,
                     params=json.dumps(params),
-                    result=json.dumps(result) if isinstance(result, (dict, list)) else str(result)
+                    result=json.dumps(result)
                 )
                 db.session.add(history_entry)
                 db.session.commit()
