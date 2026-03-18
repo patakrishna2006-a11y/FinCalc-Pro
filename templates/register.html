@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - FinCalc Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div id="toast" class="toast-msg {{ category }}">{{ message }}</div>
+      <script>
+        // Automatically hide the popup after 3 seconds
+        setTimeout(() => {
+          const toast = document.getElementById('toast');
+          if(toast) toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
+      </script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-form-side">
+                <h2>Create Account</h2>
+                <p>Join us today and start your journey</p>
+
+                <form action="/register" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="username" placeholder="Username" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="password-wrapper">
+                            <input type="password" name="password" id="password" placeholder="Password" required>
+                            <span class="toggle-password" onclick="toggleVisibility('password')">👁️</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="password-wrapper">
+                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                            <span class="toggle-password" onclick="toggleVisibility('confirm_password')">👁️</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth">Create Account</button>
+                </form>
+
+                <div class="footer-links" style="margin-top: 1.5rem;">
+                    <p>Already have an account? <a href="{{ url_for('home') }}" style="color: var(--accent);">Login here</a></p>
+                </div>
+            </div>
+
+            <div class="auth-brand-side">
+                <h1 style="font-size: 3rem; font-weight: 800;">JOIN US.</h1>
+                <p style="color: rgba(255,255,255,0.7); max-width: 300px;">The most powerful financial calculators at your fingertips. Start planning your future today.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.textContent = "🔒";
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.textContent = "👁️";
+            }
+        }
+    </script>
+
+</body>
+</html>
